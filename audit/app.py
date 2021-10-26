@@ -36,7 +36,7 @@ def get_ticket_purchase(index):
     consumer = topic.get_simple_consumer(reset_offset_on_start=True,
                                         consumer_timeout_ms=1000)
 
-    logger.info(f'Retrieving event ticket purchase at {index=}')
+    logger.info(f'Retrieving event ticket purchase at index = {index}')
 
     try:
         i = 0
@@ -46,7 +46,7 @@ def get_ticket_purchase(index):
             if msg['type'] != 'ticket':
                 continue
 
-            logger.debug(f"{msg=}, {i=}")
+            logger.debug(f"msg = {msg}, i = {i}")
             event = msg['payload']
             if i == int(index):
                 return event, 200
@@ -54,7 +54,7 @@ def get_ticket_purchase(index):
     except:
         logger.error("No more messages found")
     
-    logger.error(f"Could not find show at {index=}")
+    logger.error(f"Could not find show at index = {index}")
     return { "message": "Not Found"}, 404
 
 
@@ -67,7 +67,7 @@ def get_show(index):
     consumer = topic.get_simple_consumer(reset_offset_on_start=True,
                                         consumer_timeout_ms=1000)
 
-    logger.info(f'Retrieving event show at {index=}')
+    logger.info(f'Retrieving event show at index = {index}')
 
     try:
         i = 0
@@ -85,7 +85,7 @@ def get_show(index):
     except:
         logger.error("No more messages found")
     
-    logger.error(f"Could not find show at {index=}")
+    logger.error(f"Could not find show at index = {index}")
     return { "message": "Not Found"}, 404
 
 app = connexion.FlaskApp(__name__, specification_dir='')
