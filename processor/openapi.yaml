@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  description: ShowStarters API for venue management and ticket sales.
+  version: "1.0.0"
+  title: ShowStarters API
+  contact:
+    email: ncrooks@my.bcit.ca
+tags:
+  - name: customers
+    description: Customer related API calls
+  - name: booking
+    description: Scheduling related API calls
+paths:
+  /stats:
+    get:
+      summary: Gets event stats
+      operationId: app.get_stats
+      description: Gets show and ticket processed statistics
+      responses:
+        '200':
+          description: Successfully returned stats
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Stats'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+components:
+  schemas:
+    Stats:
+      type: object
+      required:
+        - num_tickets_purchased
+        - num_shows_scheduled
+        - num_shows_sold_out
+        - busiest_venue
+      properties:
+        num_tickets_purchased:
+          type: integer
+          example: 10
+        num_shows_scheduled:
+          type: integer
+          example: 5
+        num_shows_sold_out:
+          type: integer
+          example: 12
+        busiest_venue:
+          type: string
+          example: 'Rogers Arena'

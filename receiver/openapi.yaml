@@ -1,0 +1,110 @@
+openapi: 3.0.0
+info:
+  description: ShowStarters API for venue management and ticket sales.
+  version: "1.0.0"
+  title: ShowStarters API
+  contact:
+    email: ncrooks@my.bcit.ca
+tags:
+  - name: customers
+    description: Customer related API calls
+  - name: booking
+    description: Scheduling related API calls
+paths:
+  /show/purchase_ticket:
+    post:
+      tags:
+        - customers
+      summary: adds a ticket purchase for a particular show
+      operationId: app.purchase_ticket
+      description: Adds a purchased ticket to system
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing item already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ticket'
+        description: Ticket purchase to add to system
+  /show/schedule:
+    post:
+      tags:
+        - booking
+      summary: schedules a new show
+      operationId: app.book_show
+      description: Adds a booked show to system
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing item already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Show'
+        description: Show booking to add to system
+components:
+  schemas:
+    Ticket:
+      type: object
+      required:
+        - ticket_id
+        - ticket_holder
+        - show
+      properties:
+        ticket_id:
+          type: integer
+          example: 1
+        ticket_holder:
+          type: string
+          example: Barry B. Benson
+        show:
+          type: integer
+          example: 3
+        purchase_date:
+          type: string
+          format: date-time
+          example: '2021-08-29T09:12:33.001Z'
+        contact:
+          type: string
+          example: barryhunneyB@thehive.com
+        price:
+          type: integer
+          example: 45
+
+    Show:
+      type: object
+      required:
+        - show_id
+        - artist
+        - showtime
+        - venue
+        - available_tickets
+      properties:
+        show_id:
+          type: integer
+          example: 1
+        artist:
+          type: string
+          example: Devo
+        showtime:
+          type: string
+          format: date-time
+          example: '2021-08-29T17:00:00Z'
+        booking_contact:
+          type: string
+          example: 555-555-5555
+        available_tickets:
+          type: integer
+          example: 500
+        venue:
+          type: string
+          example: The Cranlaravay Cabaret

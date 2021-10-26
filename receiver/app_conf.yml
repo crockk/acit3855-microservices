@@ -1,0 +1,10 @@
+version: 1
+purchase_ticket:
+  url: http://localhost:8090/ticket
+schedule_show:
+  url: http://localhost:8090/show
+
+events:
+  hostname: kafka-nolan.westus2.cloudapp.azure.com
+  port: 9092
+  topic: events

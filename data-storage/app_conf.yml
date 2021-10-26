@@ -1,0 +1,12 @@
+version: 1
+datastore:
+ user: showstarters
+ password: password
+ hostname: kafka-nolan.westus2.cloudapp.azure.com
+ port: 3306
+ db: showstarters
+
+events:
+ hostname: kafka-nolan.westus2.cloudapp.azure.com
+ port: 9092
+ topic: events

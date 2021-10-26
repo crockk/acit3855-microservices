@@ -1,0 +1,134 @@
+[
+    {
+        "ticket_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "ticket_holder": "Barry B. Benson",
+        "show": {
+            "artist": "Devo",
+            "showtime": "2021-08-29T17:00:00Z",
+            "venue": "The Cranlaravay Cabaret",
+            "show_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+            "booking_contact": "555-555-5555",
+            "available_tickets": 500
+        },
+        "purchase_date": "2021-08-29T09:12:33.001Z",
+        "contact": "barryhunneyB@thehive.com"
+    },
+    {
+        "artist": "Devo",
+        "showtime": "2021-08-29T17:00:00Z",
+        "venue": "The Cranlaravay Cabaret",
+        "show_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "booking_contact": "555-555-5555",
+        "available_tickets": 500
+    },
+    {
+        "ticket_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "ticket_holder": "Barry B. Benson",
+        "show": {
+            "artist": "Devo",
+            "showtime": "2021-08-29T17:00:00Z",
+            "venue": "The Cranlaravay Cabaret",
+            "show_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+            "booking_contact": "555-555-5555",
+            "available_tickets": 500
+        },
+        "purchase_date": "2021-08-29T09:12:33.001Z",
+        "contact": "barryhunneyB@thehive.com"
+    },
+    {
+        "artist": "Devo",
+        "showtime": "2021-08-29T17:00:00Z",
+        "venue": "The Cranlaravay Cabaret",
+        "show_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "booking_contact": "555-555-5555",
+        "available_tickets": 500
+    },
+    {
+        "ticket_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "ticket_holder": "Barry B. Benson",
+        "show": {
+            "artist": "Devo",
+            "showtime": "2021-08-29T17:00:00Z",
+            "venue": "The Cranlaravay Cabaret",
+            "show_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+            "booking_contact": "555-555-5555",
+            "available_tickets": 500
+        },
+        "purchase_date": "2021-08-29T09:12:33.001Z",
+        "contact": "barryhunneyB@thehive.com"
+    },
+    {
+        "artist": "Devo",
+        "showtime": "2021-08-29T17:00:00Z",
+        "venue": "The Cranlaravay Cabaret",
+        "show_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "booking_contact": "555-555-5555",
+        "available_tickets": 500
+    },
+    {
+        "ticket_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "ticket_holder": "Barry B. Benson",
+        "show": {
+            "artist": "Devo",
+            "showtime": "2021-08-29T17:00:00Z",
+            "venue": "The Cranlaravay Cabaret",
+            "show_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+            "booking_contact": "555-555-5555",
+            "available_tickets": 500
+        },
+        "purchase_date": "2021-08-29T09:12:33.001Z",
+        "contact": "barryhunneyB@thehive.com"
+    },
+    {
+        "artist": "Devo",
+        "showtime": "2021-08-29T17:00:00Z",
+        "venue": "The Cranlaravay Cabaret",
+        "show_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "booking_contact": "555-555-5555",
+        "available_tickets": 500
+    },
+    {
+        "ticket_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "ticket_holder": "Barry B. Benson",
+        "show": {
+            "artist": "Devo",
+            "showtime": "2021-08-29T17:00:00Z",
+            "venue": "The Cranlaravay Cabaret",
+            "show_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+            "booking_contact": "555-555-5555",
+            "available_tickets": 500
+        },
+        "purchase_date": "2021-08-29T09:12:33.001Z",
+        "contact": "barryhunneyB@thehive.com"
+    },
+    {
+        "artist": "Devo",
+        "showtime": "2021-08-29T17:00:00Z",
+        "venue": "The Cranlaravay Cabaret",
+        "show_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "booking_contact": "555-555-5555",
+        "available_tickets": 500
+    },
+    {
+        "ticket_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "ticket_holder": "Barry B. Benson",
+        "show": {
+            "artist": "Devo",
+            "showtime": "2021-08-29T17:00:00Z",
+            "venue": "The Cranlaravay Cabaret",
+            "show_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+            "booking_contact": "555-555-5555",
+            "available_tickets": 500
+        },
+        "purchase_date": "2021-08-29T09:12:33.001Z",
+        "contact": "barryhunneyB@thehive.com"
+    },
+    {
+        "artist": "Devo",
+        "showtime": "2021-08-29T17:00:00Z",
+        "venue": "The Cranlaravay Cabaret",
+        "show_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "booking_contact": "555-555-5555",
+        "available_tickets": 500
+    }
+]
