@@ -26,33 +26,26 @@ from base import Base
 from show import Show
 from ticket import Ticket
 
+with open('app_conf.yml', 'r') as f:
+   app_config = yaml.safe_load(f.read())
 
-def init_app():
-    global DB_SESSION, app_config, logger
+with open('log_conf.yml', 'r') as f:
+   log_config = yaml.safe_load(f.read())
+   logging.config.dictConfig(log_config)
 
-    with open('app_conf.yml', 'r') as f:
-        app_config = yaml.safe_load(f.read())
+logger = logging.getLogger('basicLogger')
 
-    with open('log_conf.yml', 'r') as f:
-        log_config = yaml.safe_load(f.read())
-        logging.config.dictConfig(log_config)
+DB_USER = app_config['datastore']['user']
+DB_PASS = app_config['datastore']['password']
+DB_HOSTNAME = app_config['datastore']['hostname']
+DB_PORT = app_config['datastore']['port']
+DB_DATABASE = app_config['datastore']['db']
 
-    logger = logging.getLogger('basicLogger')
+DB_ENGINE = create_engine(f'mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOSTNAME}:{DB_PORT}/{DB_DATABASE}')
+Base.metadata.bind = DB_ENGINE
+DB_SESSION = sessionmaker(bind=DB_ENGINE)
 
-    DB_USER = app_config['datastore']['user']
-    DB_PASS = app_config['datastore']['password']
-    DB_HOSTNAME = app_config['datastore']['hostname']
-    DB_PORT = app_config['datastore']['port']
-    DB_DATABASE = app_config['datastore']['db']
-
-    DB_ENGINE = create_engine(f'mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOSTNAME}:{DB_PORT}/{DB_DATABASE}')
-    Base.metadata.bind = DB_ENGINE
-    DB_SESSION = sessionmaker(bind=DB_ENGINE)
-
-    logger.info(f"Connecting to DB. Hostname: {DB_HOSTNAME}, Port: {DB_PORT}")
-    t1 = Thread(target=process_messages)
-    t1.setDaemon(True)
-    t1.start()
+logger.info(f"Connecting to DB. Hostname: {DB_HOSTNAME}, Port: {DB_PORT}")
 
 def create_show_booking(body):
     """ Receives a show booking """
@@ -170,6 +163,8 @@ app = connexion.FlaskApp(__name__, specification_dir='')
 app.add_api("openapi.yaml", strict_validation=True, validate_responses=True)
 
 if __name__ == "__main__":
-    init_app()
+    t1 = Thread(target=process_messages)
+    t1.setDaemon(True)
+    t1.start()
     app.run(port=8090, debug=False)
 
