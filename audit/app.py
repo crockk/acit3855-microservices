@@ -77,7 +77,7 @@ def get_show(index):
             if msg['type'] != 'show':
                 continue
             
-            logger.debug(f"{msg=}, {i=}")
+            logger.debug(f"msg = {msg}, i = {i}")
             event = msg['payload']
             if i == int(index):
                 return event, 200
