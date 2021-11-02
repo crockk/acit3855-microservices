@@ -6,7 +6,7 @@ import AppStats from './components/AppStats'
 
 function App() {
 
-    const endpoints = ["blood_pressure", "heart_rate"]
+    const endpoints = ["ticket", "show"]
 
     const rendered_endpoints = endpoints.map((endpoint) => {
         return <EndpointAudit key={endpoint} endpoint={endpoint}/>
@@ -14,7 +14,7 @@ function App() {
 
     return (
         <div className="App">
-            <img src={logo} className="App-logo" alt="logo" height="150px" width="400px"/>
+            <img src={logo} className="App-logo" alt="logo" height="200px" width="200px"/>
             <div>
                 <AppStats/>
                 <h1>Audit Endpoints</h1>
