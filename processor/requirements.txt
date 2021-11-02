@@ -35,3 +35,4 @@ typing-extensions==3.10.0.2
 tzlocal==2.1
 urllib3==1.26.7
 Werkzeug==1.0.1
+flask-cors==3.0.10
