@@ -67,6 +67,13 @@ services:
       - "8010:8010"
     depends_on:
       - "kafka"
+  dashboard:
+    image: dashboard:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "processor"
+      - "audit"
 
 # Names our volume
 volumes:
