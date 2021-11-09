@@ -21,6 +21,7 @@ from pykafka import KafkaClient
 from pykafka.common import OffsetType
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import and_
 
 from base import Base
 from show import Show
@@ -97,13 +98,14 @@ def create_ticket_purchase(body):
     return NoContent, 201
 
 
-def get_shows(timestamp):
+def get_shows(start_timestamp, end_timestamp):
     """ Gets new scheduled shows after the timestamp """
     session = DB_SESSION()
 
-    timestamp_datetime = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%fZ")
+    start_timestamp_dt = datetime.strptime(start_timestamp, "%Y-%m-%dT%H:%M:%S.%fZ")
+    end_timestamp_dt = datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S.%fZ")
 
-    readings = session.query(Show).filter(Show.date_created >= timestamp_datetime)
+    readings = session.query(Show).filter(Show.date_created >= start_timestamp_dt, Show.date_created < end_timestamp_dt)
 
     results_list = []
     for reading in readings:
@@ -111,16 +113,17 @@ def get_shows(timestamp):
 
     session.close()
 
-    logger.info("Query for Scheduled Shows after %s returns %d results" % (timestamp, len(results_list)))
+    logger.info("Query for Scheduled Shows after %s returns %d results" % (start_timestamp, len(results_list)))
     return results_list, 200
 
-def get_tickets(timestamp):
+def get_tickets(start_timestamp, end_timestamp):
     """ Gets purchased tickets after the timestamp """
     session = DB_SESSION()
     
-    timestamp_datetime = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%fZ")
-
-    readings = session.query(Ticket).filter(Ticket.date_created >= timestamp_datetime)
+    start_timestamp_dt = datetime.strptime(start_timestamp, "%Y-%m-%dT%H:%M:%S.%fZ")
+    end_timestamp_dt = datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S.%fZ")
+    
+    readings = session.query(Ticket).filter(Ticket.date_created >= start_timestamp_dt, Ticket.date_created < end_timestamp_dt)
 
     results_list = []
     for reading in readings:
@@ -128,7 +131,7 @@ def get_tickets(timestamp):
 
     session.close()
 
-    logger.info("Query for tickets purchased after %s returns %d results" % (timestamp, len(results_list)))
+    logger.info("Query for tickets purchased after %s returns %d results" % (start_timestamp, len(results_list)))
     return results_list, 200
 
 def process_messages():

@@ -19,9 +19,16 @@ paths:
       operationId: app.get_tickets
       description: Gets purchased tickets added after a timestamp
       parameters:
-        - name: timestamp
+        - name: start_timestamp
           in: query
-          description: Filters request by timestamp
+          description: Filters request by start timestamp
+          schema:
+            type: string
+            format: date-time
+            example: '2016-08-29T09:12:33.001Z'
+        - name: end_timestamp
+          in: query
+          description: Filters request by end timestamp
           schema:
             type: string
             format: date-time
@@ -52,9 +59,16 @@ paths:
       operationId: app.get_shows
       description: Gets scheduled shows added after a timestamp
       parameters:
-        - name: timestamp
+        - name: start_timestamp
           in: query
-          description: Filters request by timestamp
+          description: Filters request by start timestamp
+          schema:
+            type: string
+            format: date-time
+            example: '2016-08-29T09:12:33.001Z'
+        - name: end_timestamp
+          in: query
+          description: Filters request by end timestamp
           schema:
             type: string
             format: date-time
