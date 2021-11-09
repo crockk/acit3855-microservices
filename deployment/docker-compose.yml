@@ -44,12 +44,18 @@ services:
     volumes:
       - my-db:/var/lib/mysql
   receiver:
+    build:
+       context: ../receiver
+       dockerfile: Dockerfile
     image: receiver:latest
     ports:
       - "8080:8080"
     depends_on:
       - "kafka"
   storage:
+    build:
+       context: ../data-storage
+       dockerfile: Dockerfile
     image: storage:latest       
     ports:
       - "8090:8090"
@@ -57,17 +63,26 @@ services:
       - "kafka"
       - "db"
   processor:
+    build:
+       context: ../processor
+       dockerfile: Dockerfile
     image: processor:latest
     network_mode: host
     depends_on:
       - "storage"
   audit:
+    build:
+       context: ../audit
+       dockerfile: Dockerfile
     image: audit:latest
     ports:
       - "8010:8010"
     depends_on:
       - "kafka"
   dashboard:
+    build:
+       context: ../dashboard-ui
+       dockerfile: Dockerfile
     image: dashboard:latest
     ports:
       - "3000:3000"
