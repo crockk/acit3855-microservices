@@ -17,6 +17,7 @@ import requests
 import yaml
 from connexion import NoContent
 from pykafka import KafkaClient
+from time import sleep
 
 with open('app_conf.yml', 'r') as f:
     app_config = yaml.safe_load(f.read())
@@ -34,8 +35,8 @@ def purchase_ticket(body):
     logger.info(f'Received event purchase_ticket request with a unique id of {id}')
 
     # resp = requests.post(app_config['purchase_ticket']['url'] , json=body, headers={'Content-Type':'application/json'})
-    client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
-    topic = client.topics[str.encode(app_config['events']['topic'])]
+    # client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
+    # topic = client.topics[str.encode(app_config['events']['topic'])]
     producer = topic.get_sync_producer()
 
     msg = { "type": "ticket",
@@ -59,8 +60,8 @@ def book_show(body):
     logger.info(f'Received event schedule_show request with a unique id of {id}')
 
     # resp = requests.post(app_config['schedule_show']['url'], json=body, headers={'Content-Type':'application/json'})
-    client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
-    topic = client.topics[str.encode(app_config['events']['topic'])]
+    # client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
+    # topic = client.topics[str.encode(app_config['events']['topic'])]
     producer = topic.get_sync_producer()
 
     msg = { "type": "show",
@@ -76,8 +77,25 @@ def book_show(body):
 
     return NoContent, 201
 
+def connect_kafka():
+    global client, topic
+    connected = False
+    max_retries = app_config['events']['retries']
+    retries = 0
+    while retries < max_retries and not connected:
+        try:
+            logger.info(f"Attempting to connect to Kafka. Retries remaining: {max_retries - retries}")
+            client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
+            topic = client.topics[str.encode(app_config['events']['topic'])]
+            connected = True
+        except Exception as e:
+            retries += 1
+            logger.error(f"Failed to connect to Kafka. Retries remaining: {max_retries - retries}")
+            sleep(app_config['events']['wait'])
+
 app = connexion.FlaskApp(__name__, specification_dir='')
 app.add_api("openapi.yaml", strict_validation=True, validate_responses=True)
 
 if __name__ == '__main__':
+    connect_kafka()
     app.run(port=8080, debug=False)
