@@ -77,26 +77,22 @@ def book_show(body):
 
     return NoContent, 201
 
-def connect_kafka():
-    global client
-    global topic
-    connected = False
-    max_retries = app_config['events']['retries']
-    retries = 0
-    while retries < max_retries and not connected:
-        try:
-            logger.info(f"Attempting to connect to Kafka. Retries remaining: {max_retries - retries}")
-            client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
-            topic = client.topics[str.encode(app_config['events']['topic'])]
-            connected = True
-        except Exception as e:
-            retries += 1
-            logger.error(f"Failed to connect to Kafka. Retries remaining: {max_retries - retries}")
-            sleep(app_config['events']['wait'])
-
 app = connexion.FlaskApp(__name__, specification_dir='')
 app.add_api("openapi.yaml", strict_validation=True, validate_responses=True)
 
+connected = False
+max_retries = app_config['events']['retries']
+retries = 0
+while retries < max_retries and not connected:
+    try:
+        logger.info(f"Attempting to connect to Kafka. Retries remaining: {max_retries - retries}")
+        client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
+        topic = client.topics[str.encode(app_config['events']['topic'])]
+        connected = True
+    except Exception as e:
+        retries += 1
+        logger.error(f"Failed to connect to Kafka. Retries remaining: {max_retries - retries}")
+        sleep(app_config['events']['wait'])
+
 if __name__ == '__main__':
-    connect_kafka()
     app.run(port=8080, debug=False)
