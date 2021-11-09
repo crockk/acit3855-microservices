@@ -63,8 +63,9 @@ def populate_stats():
             'last_updated': '2000-07-13T12:00:00.000Z'
         }
         
-    tickets_resp = requests.get(app_config['eventstore']['url'] + '/ticket' + f"?timestamp={stats['last_updated']}")
-    shows_resp = requests.get(app_config['eventstore']['url'] + '/show' + f"?timestamp={stats['last_updated']}")
+    current_timestamp = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+    tickets_resp = requests.get(app_config['eventstore']['url'] + '/ticket' + f"?start_timestamp={stats['last_updated']}&end_timestamp={current_timestamp}")
+    shows_resp = requests.get(app_config['eventstore']['url'] + '/show' + f"?start_timestamp={stats['last_updated']}&end_timestamp={current_timestamp}")
 
     for resp in (tickets_resp, shows_resp):
         if resp.status_code != 200:
@@ -83,7 +84,7 @@ def populate_stats():
     stats['num_shows_scheduled'] += len(shows)
     stats['num_shows_sold_out'] += num_shows_sold_out
     stats['busiest_venue'] = busiest_venue
-    stats['last_updated'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+    stats['last_updated'] = current_timestamp
 
     with open(app_config['datastore']['filename'], 'w') as f:
         json.dump(stats, f)
