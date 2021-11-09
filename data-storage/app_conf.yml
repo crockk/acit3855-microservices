@@ -10,3 +10,5 @@ events:
  hostname: kafka-nolan.westus2.cloudapp.azure.com
  port: 9092
  topic: events
+ retries: 5
+ wait: 10        # wait time in seconds in between retries
