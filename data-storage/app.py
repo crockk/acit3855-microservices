@@ -22,6 +22,7 @@ from pykafka.common import OffsetType
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import and_
+from time import sleep
 
 from base import Base
 from show import Show
@@ -138,8 +139,18 @@ def process_messages():
     """ Process event messages """
     hostname = "%s:%d" % (app_config["events"]["hostname"],
                 app_config["events"]["port"])
-    client = KafkaClient(hosts=hostname)
-    topic = client.topics[str.encode(app_config["events"]["topic"])]
+
+    max_retries = app_config['events']['retries']
+    retries = 0
+    while retries < max_retries:
+        try:
+            logger.info(f"Attempting to connect to Kafka. Retries: {retries}")
+            client = KafkaClient(hosts=hostname)
+            topic = client.topics[str.encode(app_config["events"]["topic"])]
+        except Exception as e:
+            logger.error(f"Failed to connect to Kafka. Retries remaining: {retries - max_retries}")
+            retries += 1
+            sleep(app_config['events']['wait'])
 
     # Create a consume on a consumer group, that only reads new messages
     # (uncommitted messages) when the service re-starts (i.e., it doesn't
