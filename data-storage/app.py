@@ -145,7 +145,7 @@ def process_messages():
     retries = 0
     while retries < max_retries and not connected:
         try:
-            logger.info(f"Attempting to connect to Kafka. Retries: {retries}")
+            logger.info(f"Attempting to connect to Kafka. Max retries: {max_retries}")
             client = KafkaClient(hosts=hostname)
             topic = client.topics[str.encode(app_config["events"]["topic"])]
             connected = True
