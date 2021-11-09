@@ -78,7 +78,8 @@ def book_show(body):
     return NoContent, 201
 
 def connect_kafka():
-    global client, topic
+    global client
+    global topic
     connected = False
     max_retries = app_config['events']['retries']
     retries = 0
