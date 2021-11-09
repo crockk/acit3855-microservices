@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../App.css';
 
 export default function EndpointAudit(props) {
+    const [index, setIndex] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [log, setLog] = useState(null);
     const [error, setError] = useState(null)
@@ -29,10 +30,10 @@ export default function EndpointAudit(props) {
     } else if (isLoaded === false){
         return(<div>Loading...</div>)
     } else if (isLoaded === true){
-        
+        setIndex(rand_val)
         return (
             <div>
-                <h3>{props.endpoint}-{rand_val}</h3>
+                <h3>{props.endpoint}-{index}</h3>
                 {JSON.stringify(log)}
             </div>
         )
