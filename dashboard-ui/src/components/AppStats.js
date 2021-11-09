@@ -43,10 +43,10 @@ export default function AppStats() {
 							<td># Tickets sold: {stats['num_tickets_purchased']}</td>
 						</tr>
 						<tr>
-							<td colspan="2">Busiest venue: {stats['busiest_venue']}</td>
+							<td colSpan="2">Busiest venue: {stats['busiest_venue']}</td>
 						</tr>
 						<tr>
-							<td colspan="2"># Sold out shows: {stats['num_shows_sold_out']}</td>
+							<td colSpan="2"># Sold out shows: {stats['num_shows_sold_out']}</td>
 						</tr>
 					</tbody>
                 </table>
