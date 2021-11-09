@@ -150,7 +150,7 @@ def process_messages():
             topic = client.topics[str.encode(app_config["events"]["topic"])]
             connected = True
         except Exception as e:
-            logger.error(f"Failed to connect to Kafka. Retries remaining: {retries - max_retries}")
+            logger.error(f"Failed to connect to Kafka. Retries remaining: {max_retries - retries}")
             retries += 1
             sleep(app_config['events']['wait'])
 
