@@ -61,6 +61,7 @@ services:
       - TARGET_ENV=test
     volumes:
       - /home/azureuser/config/receiver:/config
+      - /home/azureuser/logs:/logs
   storage:
     build:
        context: ../data-storage
@@ -75,6 +76,7 @@ services:
       - TARGET_ENV=test
     volumes:
       - /home/azureuser/config/storage:/config
+      - /home/azureuser/logs:/logs
   processor:
     build:
        context: ../processor
@@ -87,6 +89,7 @@ services:
       - TARGET_ENV=test
     volumes:
       - /home/azureuser/config/processing:/config
+      - /home/azureuser/logs:/logs
   audit:
     build:
        context: ../audit
@@ -100,6 +103,7 @@ services:
       - TARGET_ENV=test
     volumes:
       - /home/azureuser/config/audit_log:/config
+      - /home/azureuser/logs:/logs
   dashboard:
     build:
        context: ../dashboard-ui
