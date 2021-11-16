@@ -51,7 +51,7 @@ def purchase_ticket(body):
     # resp = requests.post(app_config['purchase_ticket']['url'] , json=body, headers={'Content-Type':'application/json'})
     # client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
     # topic = client.topics[str.encode(app_config['events']['topic'])]
-    producer = topic.get_sync_producer()
+    # producer = topic.get_sync_producer()
 
     msg = { "type": "ticket",
             "datetime":
@@ -76,7 +76,7 @@ def book_show(body):
     # resp = requests.post(app_config['schedule_show']['url'], json=body, headers={'Content-Type':'application/json'})
     # client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
     # topic = client.topics[str.encode(app_config['events']['topic'])]
-    producer = topic.get_sync_producer()
+    # producer = topic.get_sync_producer()
 
     msg = { "type": "show",
             "datetime":
@@ -102,6 +102,7 @@ while retries < max_retries and not connected:
         logger.info(f"Attempting to connect to Kafka. Retries remaining: {max_retries - retries}")
         client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
         topic = client.topics[str.encode(app_config['events']['topic'])]
+        producer = topic.get_sync_producer()
         connected = True
     except Exception as e:
         retries += 1
