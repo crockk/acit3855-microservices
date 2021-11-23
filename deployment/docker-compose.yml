@@ -135,12 +135,12 @@ services:
       - "storage"
       - "processor"
       - "audit"
-      - "dashboard-ui"
+      - "dashboard"
     ports:
       - "80:80"
     networks:
       - "api.network"
-      
+
 # Names our volume
 volumes:
   my-db:
