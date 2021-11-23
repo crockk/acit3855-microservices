@@ -54,7 +54,9 @@ services:
        dockerfile: Dockerfile
     image: receiver:latest
     ports:
-      - "8080:8080"
+      - "8080"
+    networks:
+      - "api.network"
     depends_on:
       - "kafka"
     environment:
@@ -68,7 +70,9 @@ services:
        dockerfile: Dockerfile
     image: storage:latest       
     ports:
-      - "8090:8090"
+      - "8090"
+    networks:
+      - "api.network"
     depends_on:
       - "kafka"
       - "db"
@@ -82,7 +86,10 @@ services:
        context: ../processor
        dockerfile: Dockerfile
     image: processor:latest
-    network_mode: host
+    ports:
+      - "8100"
+    networks:
+      - "api.network"
     depends_on:
       - "storage"
     environment:
@@ -96,7 +103,9 @@ services:
        dockerfile: Dockerfile
     image: audit:latest
     ports:
-      - "8010:8010"
+      - "8010"
+    networks:
+      - "api.network"
     depends_on:
       - "kafka"
     environment:
@@ -110,7 +119,9 @@ services:
        dockerfile: Dockerfile
     image: dashboard:latest
     ports:
-      - "3000:3000"
+      - "3000"
+    networks:
+      - "api.network"
     depends_on:
       - "processor"
       - "audit"
@@ -118,4 +129,7 @@ services:
 # Names our volume
 volumes:
   my-db:
+
+networks:
+  api.network:
 
