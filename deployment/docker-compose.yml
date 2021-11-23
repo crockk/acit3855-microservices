@@ -97,6 +97,7 @@ services:
     volumes:
       - /home/azureuser/config/processing:/config
       - /home/azureuser/logs:/logs
+      - processing-db:/data
   audit:
     build:
        context: ../audit
@@ -144,6 +145,7 @@ services:
 # Names our volume
 volumes:
   my-db:
+  processing-db:
 
 networks:
   api.network:
