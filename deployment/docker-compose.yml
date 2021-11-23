@@ -53,6 +53,7 @@ services:
        context: ../receiver
        dockerfile: Dockerfile
     image: receiver:latest
+    hostname: receiver
     ports:
       - "8080"
     networks:
@@ -68,7 +69,8 @@ services:
     build:
        context: ../data-storage
        dockerfile: Dockerfile
-    image: storage:latest       
+    image: storage:latest
+    hostname: storage
     ports:
       - "8090"
     networks:
@@ -86,6 +88,7 @@ services:
        context: ../processor
        dockerfile: Dockerfile
     image: processor:latest
+    hostname: processor
     ports:
       - "8100"
     networks:
@@ -103,6 +106,7 @@ services:
        context: ../audit
        dockerfile: Dockerfile
     image: audit:latest
+    hostname: audit
     ports:
       - "8010"
     networks:
@@ -119,6 +123,7 @@ services:
        context: ../dashboard-ui
        dockerfile: Dockerfile
     image: dashboard:latest
+    hostname: dashboard
     ports:
       - "3000"
     networks:
@@ -131,6 +136,7 @@ services:
     image: nginx:latest
     volumes:
       - /home/azureuser/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    hostname: nginx
     depends_on:
       - "receiver"
       - "storage"
