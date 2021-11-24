@@ -1,0 +1,3 @@
+@Library('assignment3') _
+
+python_build("acit4850-assignment3", "receiver")
