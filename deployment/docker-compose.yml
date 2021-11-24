@@ -53,10 +53,10 @@ services:
     volumes:
       - my-db:/var/lib/mysql
   receiver:
-    build:
-       context: ../receiver
-       dockerfile: Dockerfile
-    image: receiver:latest
+    # build:
+    #    context: ../receiver
+    #    dockerfile: Dockerfile
+    image: ncrooks/acit4850-receiver:latest
     hostname: receiver
     ports:
       - "8080"
@@ -70,10 +70,10 @@ services:
       - /home/azureuser/config/receiver:/config
       - /home/azureuser/logs:/logs
   storage:
-    build:
-       context: ../data-storage
-       dockerfile: Dockerfile
-    image: storage:latest
+    # build:
+    #    context: ../data-storage
+    #    dockerfile: Dockerfile
+    image: ncrooks/acit4850-storage:latest
     hostname: storage
     ports:
       - "8090"
@@ -88,10 +88,10 @@ services:
       - /home/azureuser/config/storage:/config
       - /home/azureuser/logs:/logs
   processor:
-    build:
-       context: ../processor
-       dockerfile: Dockerfile
-    image: processor:latest
+    # build:
+    #    context: ../processor
+    #    dockerfile: Dockerfile
+    image: ncrooks/acit4850-processor:latest
     hostname: processor
     ports:
       - "8100"
@@ -106,10 +106,10 @@ services:
       - /home/azureuser/logs:/logs
       - processing-db:/data
   audit:
-    build:
-       context: ../audit
-       dockerfile: Dockerfile
-    image: audit:latest
+    # build:
+    #    context: ../audit
+    #    dockerfile: Dockerfile
+    image: ncrooks/acit4850-audit:latest
     hostname: audit
     ports:
       - "8010"
