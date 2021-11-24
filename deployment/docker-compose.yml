@@ -88,6 +88,7 @@ services:
       - /home/azureuser/config/storage:/config
       - /home/azureuser/logs:/logs
   processor:
+  # comment for demo
     # build:
     #    context: ../processor
     #    dockerfile: Dockerfile
