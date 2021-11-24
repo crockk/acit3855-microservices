@@ -1,3 +1,4 @@
+# comment for build
 version: 1
 events:
   hostname: kafka-nolan.westus2.cloudapp.azure.com
