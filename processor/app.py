@@ -42,6 +42,7 @@ logger = logging.getLogger('basicLogger')
 
 logger.info("App Conf File: %s"% app_conf_file)
 logger.info("Log Conf File: %s"% log_conf_file)
+logger.info('entry for demo')
 
 def get_stats():
     """ Receives a get stats event """
